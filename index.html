@@ -5,32 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Text board</title>
     <link rel="stylesheet" href="style.css">
+    <link href='https://fonts.googleapis.com/css?family=Lexend Deca' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.css" integrity="sha512-OQDNdI5rpnZ0BRhhJc+btbbtnxaj+LdQFeh0V9/igiEPDiWE2fG+ZsXl0JEH+bjXKPJ3zcXqNyP4/F/NegVdZg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="javascript.js"></script>
 
 </head>
 <body>
-    <header>
-        <h3>LED TEXT BOARD</h3>
-    </header>
+    <div class="head-container">
+
+        <div id="buttonMenu">
+            <button><i id="nav-button" class="ri-menu-fill"></i></button>
+        </div>
+        <header>
+            <h3>TEXT BOARD</h3>
+        </header>
+    </div>
 
     <main>
-        <div id="left-size-screen">
-            <div class="feature">
-                <div id="Edit">
-                    <ul>
-                        <li><input type="text" placeholder="Enter your text"></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                    </ul>
-                </div>
-                <div id="Frame"></div>
-            </div>
+        <div class="textField">
+            <input id="inputText" type="text" placeholder="Enter Your Text">
         </div>
-        <div id="right-size-screen">
-
+        <div class="canvas">
+            <canvas id="myCanvas" style="background-color: white;"></canvas>
         </div>
     </main>
 
