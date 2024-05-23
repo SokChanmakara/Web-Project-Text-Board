@@ -1,35 +1,38 @@
-body {
-  background-color: #3b3b3b;
+body{
+    background-color: #3b3b3b;
+}
+.head-container{
+    display: flex;
+
 }
 
-.head-container {
-  display: flex;
-
+header{
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
 }
 
-header {
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
+h1{
+    color: yellow;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-style: italic;
+    font-variant: small-caps;
+    font-weight:bold;
+    text-decoration: underline;
+    text-decoration-color: white;
 }
 
-h3 {
-  color: white;
-  font-family: Lexend Deca;
-  font-size: 4em;
+#nav-button{
+    color: white;
+    font-size: 3em;
+    display: flex;
+    margin-left:10px;
 }
 
-#nav-button {
-  color: white;
-  font-size: 3em;
-  display: flex;
-  margin-left: 10px;
-}
-
-#buttonMenu {
-  display: flex;
-  justify-content: start;
-  margin-right: 30%;
+#buttonMenu{
+    display:flex;
+    justify-content: start;
+    margin-right: 30%;
 }
 
 .input-container {
@@ -45,15 +48,17 @@ h3 {
   height: 2.5em;
   border-radius: 10px;
   padding-left: 15px;
+
+  background-color: #F9F1CB;
 }
 
-canvas {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 95%;
-  height: 450px;
-  border-radius: 20px;
+canvas{
+    display:block;
+    margin-left:auto;
+    margin-right:auto;
+    width: 95%;
+    height:450px;
+    border-radius: 20px;
 }
 
 /* The side navigation menu */
@@ -69,7 +74,7 @@ canvas {
   top: 0;
   /* Stay at the top */
   left: 0;
-  background-color: white;
+  background-color: #2F4858;
   /* Black*/
   overflow-x: hidden;
   /* Disable horizontal scroll */
@@ -81,6 +86,15 @@ canvas {
   border-color: #000000;
   border: 1px solid;
 
+}
+
+#closeBtn{
+    fill:#FF6079;
+}
+#closeBtn:hover{
+    width: 43px;
+    height: 43px;
+    fill:#f77387;
 }
 
 /* The navigation menu links */
@@ -112,22 +126,26 @@ canvas {
 .dropbtn {
   display: flex;
   justify-content: center;
-  background-color: #3498DB;
   color: white;
   padding: 10px;
   font-size: 16px;
+  background: linear-gradient(145deg, #60c7c3, #51a7a4);
+  box-shadow:  5px 5px 10px #474c4c,
+               -5px -5px 10px #4a4d4c;
   border: none;
   cursor: pointer;
   width: 15em;
-  border-radius: 15px;
-  margin: 5px;
+  border-radius: 25px;
   transition-duration: 0.3s;
 }
 
 /* Dropdown button on hover & focus */
 .dropbtn:hover,
 .dropbtn:focus {
-  background-color: #2980B9;
+  background-color: #1e83bd;
+  box-shadow: inset 5px 5px 10px #38bbb4,
+            inset -5px -5px 10px #35bcb5;
+  font-size:17px;
 }
 
 /* The container <div> - needed to position the dropdown content */
