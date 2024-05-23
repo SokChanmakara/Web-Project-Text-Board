@@ -193,3 +193,9 @@ canvas{
   background-color: aquamarine;
 
 } */
+
+/* Ensure the canvas maintains its style in fullscreen mode */
+canvas:fullscreen {
+  width: 100%;
+  height: 100%;
+}
