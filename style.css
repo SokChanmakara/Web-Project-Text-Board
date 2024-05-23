@@ -13,8 +13,13 @@ header{
 }
 
 h1{
-    color: white;
-    font-family: Lexend Deca;
+    color: yellow;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-style: italic;
+    font-variant: small-caps;
+    font-weight:bold;
+    text-decoration: underline;
+    text-decoration-color: white;
 }
 
 #nav-button{
@@ -43,6 +48,8 @@ h1{
   height: 2.5em;
   border-radius: 10px;
   padding-left: 15px;
+
+  background-color: #F9F1CB;
 }
 
 canvas{
