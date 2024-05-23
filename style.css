@@ -122,7 +122,7 @@ canvas {
   cursor: pointer;
   width: 15em;
   border-radius: 15px;
-
+  margin: 5px;
 }
 
 /* Dropdown button on hover & focus */
@@ -134,8 +134,10 @@ canvas {
 /* The container <div> - needed to position the dropdown content */
 .dropdown {
   display: flex;
+  flex-direction: column;
   position: relative;
   justify-content: center;
+  align-items: center;
 }
 
 /* Dropdown Content (Hidden by Default) */
@@ -146,6 +148,7 @@ canvas {
   min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
+  top: 50px;
 }
 
 /* Links inside the dropdown */
@@ -165,3 +168,11 @@ canvas {
 .show {
   display: block;
 }
+
+/* .text-all{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  background-color: aquamarine;
+
+} */
