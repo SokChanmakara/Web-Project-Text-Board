@@ -1,42 +1,155 @@
-body{
-    background-color: #3b3b3b;
-}
-.head-container{
-    display: flex;
-
-}
-
-header{
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
+body {
+  background-color: #3b3b3b;
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  user-select: none;
+  box-sizing: border-box;
 }
 
-h1{
-    color: yellow;
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-    font-style: italic;
-    font-variant: small-caps;
-    font-weight:bold;
-    text-decoration: underline;
-    text-decoration-color: white;
+header {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
 }
 
-#nav-button{
-    color: white;
-    font-size: 3em;
-    display: flex;
-    margin-left:10px;
+h1 {
+  color: yellow;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-style: italic;
+  font-variant: small-caps;
+  font-weight: bold;
+  text-decoration: underline;
+  text-decoration-color: white;
 }
 
-#buttonMenu{
-    display:flex;
-    justify-content: start;
-    margin-right: 30%;
+#nav-button {
+  position: absolute;
+  top: 15px;
+  left: 45px;
+  height: 45px;
+  width: 45px;
+  text-align: center;
+  background: #1b1b1b;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: left 0.4s ease;
+  color: white;
+  font-size: 28px;
+  line-height: 45px;
+}
+
+#nav-button.click {
+  left: 260px;
+}
+
+.sidebar {
+  position: fixed;
+  width: 250px;
+  height: 100%;
+  left: -250px;
+  background: #1b1b1b;
+  transition: left 0.4s ease;
+}
+
+.sidebar.show {
+  left: 0px;
+}
+
+.sidebar .text {
+  color: white;
+  font-size: 25px;
+  font-weight: 600;
+  line-height: 65px;
+  text-align: center;
+  background: #1e1e1e;
+  letter-spacing: 1px;
+}
+
+nav ul {
+  background: #1b1b1b;
+  height: 100%;
+  width: 100%;
+  list-style: none;
+}
+
+nav ul li {
+  line-height: 60px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+nav ul li:last-child {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+nav ul li a {
+  position: relative;
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
+  padding-left: 40px;
+  font-weight: 500;
+  display: block;
+  width: 100%;
+  border-left: 3px solid transparent;
+}
+
+nav ul li.active a {
+  color: cyan;
+  background: #1e1e1e;
+  border-left-color: cyan;
+}
+
+nav ul li a:hover {
+  background: #1e1e1e;
+}
+
+nav ul ul {
+  position: static;
+  display: none;
+}
+
+nav ul .feat-show.show,
+nav ul .serv-show.show1 {
+  display: block;
+}
+
+nav ul ul li {
+  line-height: 42px;
+  border-top: none;
+}
+
+nav ul ul li a {
+  font-size: 17px;
+  color: #e6e6e6;
+  padding-left: 80px;
+}
+
+nav ul li.active ul li a {
+  color: #e6e6e6;
+  background: #1b1b1b;
+  border-left-color: transparent;
+}
+
+nav ul ul li a:hover {
+  color: cyan !important;
+  background: #1e1e1e !important;
+}
+
+nav ul li a span {
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+  font-size: 22px;
+  transition: transform 0.4s;
+}
+
+nav ul li a span.rotate {
+  transform: translateY(-50%) rotate(-180deg);
 }
 
 .input-container {
-  /* background-color: beige; */
   display: flex;
   justify-content: center;
   margin-top: 15px;
@@ -48,153 +161,18 @@ h1{
   height: 2.5em;
   border-radius: 10px;
   padding-left: 15px;
-
   background-color: #F9F1CB;
 }
 
-canvas{
-    display:block;
-    margin-left:auto;
-    margin-right:auto;
-    width: 95%;
-    height:450px;
-    border-radius: 20px;
-}
-
-/* The side navigation menu */
-.sidenav {
-  height: 100%;
-  /* 100% Full-height */
-  width: 0;
-  /* 0 width - change this with JavaScript */
-  position: fixed;
-  /* Stay in place */
-  z-index: 1;
-  /* Stay on top */
-  top: 0;
-  /* Stay at the top */
-  left: 0;
-  background-color: #2F4858;
-  /* Black*/
-  overflow-x: hidden;
-  /* Disable horizontal scroll */
-  padding-top: 60px;
-  /* Place content 60px from the top */
-  transition: 0.5s;
-  /* 0.5 second transition effect to slide in the sidenav */
-  border-radius: 15px;
-  border-color: #000000;
-  border: 1px solid;
-
-}
-
-#closeBtn{
-    fill:#FF6079;
-}
-#closeBtn:hover{
-    width: 43px;
-    height: 43px;
-    fill:#f77387;
-}
-
-/* The navigation menu links */
-.sidenav a {
-  padding: 8px 8px 8px 32px;
-  text-decoration: none;
-  font-size: 25px;
-  color: #818181;
+canvas {
   display: block;
-  transition: 0.3s;
+  margin-left: auto;
+  margin-right: auto;
+  width: 95%;
+  height: 450px;
+  border-radius: 20px;
 }
 
-/* When you mouse over the navigation links, change their color */
-.sidenav a:hover {
-  color: #f1f1f1;
-}
-
-/* Position and style the close button (top right corner) */
-.sidenav .closebtn {
-  position: absolute;
-  top: 0;
-  right: 25px;
-  font-size: 36px;
-  margin-left: 50px;
-}
-
-
-/* Dropdown Button */
-.dropbtn {
-  display: flex;
-  justify-content: center;
-  color: white;
-  padding: 10px;
-  font-size: 16px;
-  background: linear-gradient(145deg, #60c7c3, #51a7a4);
-  box-shadow:  5px 5px 10px #474c4c,
-               -5px -5px 10px #4a4d4c;
-  border: none;
-  cursor: pointer;
-  width: 15em;
-  border-radius: 25px;
-  transition-duration: 0.3s;
-}
-
-/* Dropdown button on hover & focus */
-.dropbtn:hover,
-.dropbtn:focus {
-  background-color: #1e83bd;
-  box-shadow: inset 5px 5px 10px #38bbb4,
-            inset -5px -5px 10px #35bcb5;
-  font-size:17px;
-}
-
-/* The container <div> - needed to position the dropdown content */
-.dropdown {
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  justify-content: center;
-  align-items: center;
-}
-
-/* Dropdown Content (Hidden by Default) */
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f1f1f1;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-  z-index: 1;
-  top: 50px;
-}
-
-/* Links inside the dropdown */
-.dropdown-content a {
-  color: black;
-  padding: 12px 10px;
-  text-decoration: none;
-  display: block;
-}
-
-/* Change color of dropdown links on hover */
-.dropdown-content a:hover {
-  background-color: #ddd;
-}
-
-/* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
-.show {
-  display: block;
-}
-
-/* .text-all{
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  background-color: aquamarine;
-
-} */
-
-/* Ensure the canvas maintains its style in fullscreen mode */
 canvas:fullscreen {
   width: 100%;
   height: 100%;
