@@ -1,3 +1,12 @@
+@font-face {
+  font-family:Taprom ;
+  src: url(font/Taprom.ttf);
+}
+
+@font-face {
+  font-family: Jacquard ;
+  src: url(font/Jacquard12-Regular.ttf);
+}
 body {
   background-color: #3b3b3b;
   margin: 0;
