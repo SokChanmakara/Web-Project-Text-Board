@@ -14,7 +14,14 @@ document.addEventListener("DOMContentLoaded", function () {
       });
   });
 
-  //document.getElementById("fullscreen-btn").addEventListener("click", openFullscreen); // Add this line
+  document.querySelectorAll('#fontSelector a').forEach(function(fontLink) {
+      fontLink.addEventListener('click', function(event) {
+          event.preventDefault();
+          var selectedFont = this.getAttribute('data-value');
+          document.getElementById('textInput').style.fontFamily = selectedFont;
+          updateCanvasFont(selectedFont);
+      });
+  });
 });
 
 /* The remaining code for the text animation and canvas functionality */
@@ -22,6 +29,7 @@ let xPos;
 let animationId;
 let text = "";
 let textSize = 100;
+let currentFont = "Arial"; // Default font
 
 function adjustCanvasResolution(canvas) {
   const ratio = window.devicePixelRatio || 1;
@@ -48,7 +56,7 @@ function animateText() {
   const canvas = document.getElementById("textCanvas");
   const context = canvas.getContext("2d");
   context.clearRect(0, 0, canvas.width, canvas.height);
-  context.font = `${textSize}px Arial`;
+  context.font = `${textSize}px ${currentFont}`;
   context.fillStyle = "black";
   context.textAlign = "left";
   context.fillText(text, xPos, canvas.height / 2 / (window.devicePixelRatio || 1));
@@ -57,6 +65,15 @@ function animateText() {
       xPos = canvas.width / (window.devicePixelRatio || 1);
   }
   animationId = requestAnimationFrame(animateText);
+}
+
+function updateCanvasFont(font) {
+  currentFont = font;
+  if (animationId) {
+      cancelAnimationFrame(animationId);
+      animationId = null;
+      startAnimation();
+  }
 }
 
 function openFullscreen() {
@@ -80,6 +97,3 @@ document.getElementById("textCanvas").addEventListener("fullscreenchange", () =>
       startAnimation();
   }
 });
-
-document.getElementById("textInput").addEventListener("input", startAnimation);
-startAnimation();
