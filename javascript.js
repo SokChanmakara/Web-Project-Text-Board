@@ -22,6 +22,10 @@ document.addEventListener("DOMContentLoaded", function () {
           updateCanvasFont(selectedFont);
       });
   });
+  document.getElementById('colorPicker').addEventListener('input', function () {
+    var selectedColor = this.value;
+    updateCanvasTextColor(selectedColor);
+  });
 });
 
 /* The remaining code for the text animation and canvas functionality */
@@ -29,6 +33,7 @@ let xPos;
 let animationId;
 let text = "";
 let textSize = 100;
+let textColor ="black";
 let textSpeed = 1;
 let currentFont = "Arial"; // Default font
 
@@ -59,6 +64,7 @@ function animateText() {
   context.clearRect(0, 0, canvas.width, canvas.height);
   context.font = `${textSize}px ${currentFont}`;
   context.fillStyle = "black";
+  context.fillStyle = textColor;
   context.textAlign = "left";
   context.fillText(text, xPos, canvas.height / 2 / (window.devicePixelRatio || 1));
   xPos -= textSpeed;
@@ -136,6 +142,13 @@ function updateCanvasSpeed(speed){
   }
 }
 
+function updateCanvasTextColor(color) {
+  if (animationId) {
+      cancelAnimationFrame(animationId); 
+      animationId = null;
+      startAnimation();   
+  }
+}
 // add background color picker function
 document.getElementById('backgroundColorPicker').addEventListener('input',function(){
   const canvas = document.getElementById("textCanvas");
