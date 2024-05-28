@@ -10,9 +10,11 @@ document.addEventListener("DOMContentLoaded", function () {
   document.querySelectorAll('.feat-btn, .serv-btn').forEach(btn => {
       btn.addEventListener('click', function () {
           this.nextElementSibling.classList.toggle('show');
-          this.querySelector('span').classList.toggle('rotate');
+          this.querySelector('i').classList.toggle('rotate');
       });
   });
+
+  //document.getElementById("fullscreen-btn").addEventListener("click", openFullscreen); // Add this line
 });
 
 /* The remaining code for the text animation and canvas functionality */
