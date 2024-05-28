@@ -97,3 +97,20 @@ document.getElementById("textCanvas").addEventListener("fullscreenchange", () =>
       startAnimation();
   }
 });
+
+document.querySelectorAll('#sizeSelector a').forEach(function(sizeLink){
+  sizeLink.addEventListener('click', function(event){
+    event.preventDefault();
+    const selectedSize = this.getAttribute('data-size');
+    updateCanvasFontSize(selectedSize);
+  })
+})
+
+function updateCanvasFontSize(size){
+  textSize = size;
+  if(animationId){
+    cancelAnimationFrame(animationId);
+    animationId = null;
+    startAnimation();
+  }
+}
