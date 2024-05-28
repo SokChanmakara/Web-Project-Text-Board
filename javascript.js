@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
   document.querySelectorAll('.feat-btn, .serv-btn').forEach(btn => {
       btn.addEventListener('click', function () {
           this.nextElementSibling.classList.toggle('show');
-          this.querySelector('span').classList.toggle('rotate');
+          this.querySelector('i').classList.toggle('rotate');
       });
   });
 

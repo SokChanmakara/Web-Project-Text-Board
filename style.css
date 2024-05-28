@@ -59,6 +59,7 @@ h1 {
   left: -250px;
   background: #1b1b1b;
   transition: left 0.4s ease;
+  margin-top: -20px;
 }
 
 .sidebar.show {
@@ -80,6 +81,7 @@ nav ul {
   height: 100%;
   width: 100%;
   list-style: none;
+  overflow: scroll;
 }
 
 nav ul li {
@@ -89,6 +91,12 @@ nav ul li {
 
 nav ul li:last-child {
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+nav ul li a:focus{
+  color: cyan;
+  background: #1e1e1e;
+  border-left-color: cyan;
 }
 
 nav ul li a {
@@ -103,11 +111,11 @@ nav ul li a {
   border-left: 3px solid transparent;
 }
 
-nav ul li.active a {
+/* nav ul li.focus a {
   color: cyan;
   background: #1e1e1e;
   border-left-color: cyan;
-}
+} */
 
 nav ul li a:hover {
   background: #1e1e1e;
@@ -145,7 +153,7 @@ nav ul ul li a:hover {
   background: #1e1e1e !important;
 }
 
-nav ul li a span {
+nav ul li a i {
   position: absolute;
   top: 50%;
   right: 20px;
@@ -154,7 +162,7 @@ nav ul li a span {
   transition: transform 0.4s;
 }
 
-nav ul li a span.rotate {
+nav ul li a i.rotate {
   transform: translateY(-50%) rotate(-180deg);
 }
 
@@ -171,6 +179,7 @@ nav ul li a span.rotate {
   border-radius: 10px;
   padding-left: 15px;
   background-color: #F9F1CB;
+  margin-top: 30px;
 }
 
 canvas {
