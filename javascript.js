@@ -99,6 +99,7 @@ document.getElementById("textCanvas").addEventListener("fullscreenchange", () =>
   }
 });
 
+// function to change size
 document.querySelectorAll('#sizeSelector a').forEach(function(sizeLink){
   sizeLink.addEventListener('click', function(event){
     event.preventDefault();
@@ -107,6 +108,7 @@ document.querySelectorAll('#sizeSelector a').forEach(function(sizeLink){
   })
 })
 
+// update the canvas 
 function updateCanvasFontSize(size){
   textSize = size;
   if(animationId){
@@ -116,6 +118,7 @@ function updateCanvasFontSize(size){
   }
 }
 
+// function to change speed
 document.querySelectorAll('#speedSelector a').forEach(function(speedLink){
   speedLink.addEventListener('click',function(event){
     event.preventDefault();
@@ -124,6 +127,7 @@ document.querySelectorAll('#speedSelector a').forEach(function(speedLink){
   })
 })
 
+// update the canvas to adapted with selected speed
 function updateCanvasSpeed(speed){
   textSpeed = speed;
   if(animationId){
@@ -131,3 +135,10 @@ function updateCanvasSpeed(speed){
     startAnimation();
   }
 }
+
+// add background color picker function
+document.getElementById('backgroundColorPicker').addEventListener('input',function(){
+  const canvas = document.getElementById("textCanvas");
+  const color = this.value;
+  canvas.style.backgroundColor = color;
+})

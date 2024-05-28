@@ -182,6 +182,13 @@ nav ul li a i.rotate {
   margin-top: 30px;
 }
 
+/* style the color picker */
+input[type="color"] {
+	border: none;
+	width: 25px;
+	height: 25px;
+
+}
 canvas {
   display: block;
   margin-left: auto;
