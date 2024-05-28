@@ -29,6 +29,7 @@ let xPos;
 let animationId;
 let text = "";
 let textSize = 100;
+let textSpeed = 1;
 let currentFont = "Arial"; // Default font
 
 function adjustCanvasResolution(canvas) {
@@ -60,7 +61,7 @@ function animateText() {
   context.fillStyle = "black";
   context.textAlign = "left";
   context.fillText(text, xPos, canvas.height / 2 / (window.devicePixelRatio || 1));
-  xPos -= 3;
+  xPos -= textSpeed;
   if (xPos + context.measureText(text).width < 0) {
       xPos = canvas.width / (window.devicePixelRatio || 1);
   }
@@ -110,6 +111,22 @@ function updateCanvasFontSize(size){
   textSize = size;
   if(animationId){
     cancelAnimationFrame(animationId);
+    animationId = null;
+    startAnimation();
+  }
+}
+
+document.querySelectorAll('#speedSelector a').forEach(function(speedLink){
+  speedLink.addEventListener('click',function(event){
+    event.preventDefault();
+    const selectedSpeed = this.getAttribute('data-speed');
+    updateCanvasSpeed(selectedSpeed);
+  })
+})
+
+function updateCanvasSpeed(speed){
+  textSpeed = speed;
+  if(animationId){
     animationId = null;
     startAnimation();
   }
