@@ -63,7 +63,6 @@ function animateText() {
   const context = canvas.getContext("2d");
   context.clearRect(0, 0, canvas.width, canvas.height);
   context.font = `${textSize}px ${currentFont}`;
-  context.fillStyle = "black";
   context.fillStyle = textColor;
   context.textAlign = "left";
   context.fillText(text, xPos, canvas.height / 2 / (window.devicePixelRatio || 1));
@@ -141,8 +140,8 @@ function updateCanvasSpeed(speed){
     startAnimation();
   }
 }
-
 function updateCanvasTextColor(color) {
+  textColor = color; 
   if (animationId) {
       cancelAnimationFrame(animationId); 
       animationId = null;
