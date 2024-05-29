@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
   const navButton = document.getElementById('nav-button');
   const sidebar = document.getElementById('sidebar');
-
+  
   navButton.addEventListener('click', function () {
       sidebar.classList.toggle('show');
       navButton.classList.toggle('click');
@@ -24,12 +24,13 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-/* The remaining code for the text animation and canvas functionality */
+/* Declare variable in global scope */
 let xPos;
 let animationId;
 let text = "";
 let textSize = 100;
 let textSpeed = 1;
+let textColor = "black";
 let currentFont = "Arial"; // Default font
 
 function adjustCanvasResolution(canvas) {
@@ -58,7 +59,7 @@ function animateText() {
   const context = canvas.getContext("2d");
   context.clearRect(0, 0, canvas.width, canvas.height);
   context.font = `${textSize}px ${currentFont}`;
-  context.fillStyle = "black";
+  context.fillStyle = textColor;
   context.textAlign = "left";
   context.fillText(text, xPos, canvas.height / 2 / (window.devicePixelRatio || 1));
   xPos -= textSpeed;
@@ -142,3 +143,15 @@ document.getElementById('backgroundColorPicker').addEventListener('input',functi
   const color = this.value;
   canvas.style.backgroundColor = color;
 })
+
+document.getElementById('colorPicker').addEventListener('input',function(){
+  const tColor = this.value;
+  updateCanvasTextColor(tColor);
+})
+
+function updateCanvasTextColor(color){
+  textColor = color;
+  if(animationId){
+    startAnimation();
+  }
+}
