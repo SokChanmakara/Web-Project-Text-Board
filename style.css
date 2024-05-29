@@ -87,6 +87,7 @@ nav ul {
 nav ul li {
   line-height: 60px;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
+
 }
 
 nav ul li:last-child {
@@ -129,6 +130,21 @@ nav ul ul {
 nav ul .feat-show.show,
 nav ul .serv-show.show1 {
   display: block;
+  height: 100px;
+}
+/* change scrollbar style */
+::-webkit-scrollbar{
+  width: 12px;
+  height: 12px;
+ 
+}
+::-webkit-scrollbar-thumb{
+  background-color: #888;
+  border-radius: 10px;
+  border: 3px solid #1b1b1b;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: cyan; 
 }
 
 nav ul ul li {
