@@ -35,7 +35,6 @@ let text = "";
 let textSize = 100;
 let textColor ="black";
 let textSpeed = 1;
-let textColor = "black";
 let currentFont = "Arial"; // Default font
 
 function adjustCanvasResolution(canvas) {
