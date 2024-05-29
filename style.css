@@ -205,6 +205,18 @@ input[type="color"] {
 	height: 25px;
 
 }
+/* style the audio controls */
+audio{
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: 10px;
+  background-color: #000000;
+  border: none;
+  border-radius: 5px;
+  padding: 5px;
+}
+
 canvas {
   display: block;
   margin-left: auto;
