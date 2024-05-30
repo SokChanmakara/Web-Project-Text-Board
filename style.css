@@ -17,9 +17,10 @@ body {
 }
 
 header {
+  font-size: 4rem;
   display: flex;
   justify-content: center;
-  margin-top: 20px;
+  margin-top: 10px;
 }
 
 h1 {
@@ -34,7 +35,7 @@ h1 {
 
 #nav-button {
   position: absolute;
-  top: 15px;
+  top: 25px;
   left: 45px;
   height: 45px;
   width: 45px;
