@@ -1,4 +1,5 @@
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", function () { //Ensure code will run only HTML is loaded and parsed
+  // Navigation button and side bar
   const navButton = document.getElementById('nav-button');
   const sidebar = document.getElementById('sidebar');
   
@@ -7,7 +8,8 @@ document.addEventListener("DOMContentLoaded", function () {
       navButton.classList.toggle('click');
   });
 
-  document.querySelectorAll('.feat-btn, .serv-btn').forEach(btn => {
+  // Up down arrow rotate
+  document.querySelectorAll('.feat-btn').forEach(btn => {
       btn.addEventListener('click', function () {
           this.nextElementSibling.classList.toggle('show');
           this.querySelector('i').classList.toggle('rotate');
@@ -34,15 +36,24 @@ let textColor ="black";
 let textSpeed = 1;
 let currentFont = "Arial"; // Default font
 
+
+/*
+window.devicePixelRatio is a property that returns the ratio of the resolution 
+in physical pixels to the resolution in CSS pixels for the current display device.
+
+The style.width and style.height properties of the canvas are set to 
+the element's original size in CSS pixels. This ensures that the canvas appears 
+to be the same size on the page, despite the increased resolution.
+*/
 function adjustCanvasResolution(canvas) {
-  const ratio = window.devicePixelRatio || 1;
-  const rect = canvas.getBoundingClientRect();
+  const ratio = window.devicePixelRatio || 1; //Not define, default = 1
+  const rect = canvas.getBoundingClientRect(); //returns the size of the canvas element and its position relative to the viewport
   canvas.width = rect.width * ratio;
   canvas.height = rect.height * ratio;
   canvas.style.width = `${rect.width}px`;
   canvas.style.height = `${rect.height}px`;
-  const context = canvas.getContext('2d');
-  context.scale(ratio, ratio);
+  const context = canvas.getContext('2d'); //render 2d
+  context.scale(ratio, ratio); //scale the drawing (verticle and horizontal) make it clearer
 }
 
 function startAnimation() {
