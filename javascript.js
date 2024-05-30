@@ -95,14 +95,14 @@ function openFullscreen() {
   }
 }
 
-document.getElementById("textCanvas").addEventListener("fullscreenchange", () => {
-  if (!document.fullscreenElement) {
-      cancelAnimationFrame(animationId);
-      animationId = null;
-  } else {
-      startAnimation();
-  }
-});
+// document.getElementById("textCanvas").addEventListener("fullscreenchange", () => {
+//   if (!document.fullscreenElement) {
+//       cancelAnimationFrame(animationId);
+//       animationId = null;
+//   } else {
+//       startAnimation();
+//   }
+// });
 
 // function to change size
 document.querySelectorAll('#sizeSelector a').forEach(function(sizeLink){
