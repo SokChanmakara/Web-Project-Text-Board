@@ -69,14 +69,14 @@ span {
   /* color: yellow; */
   /* font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; */
   font-style: italic;
-  /* font-variant: small-caps; */
+  font-variant: small-caps;
   /* font-weight: bold; */
   text-decoration: none;
 }
 
 .neon-text {
   color: #fff;
-  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  /* font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; */
   text-shadow: 
       0 0 2px #fff,
       0 0 5px #fff,
