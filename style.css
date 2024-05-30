@@ -66,14 +66,72 @@ header:hover{
 
 
 span {
-  color: yellow;
-  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  /* color: yellow; */
+  /* font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; */
   font-style: italic;
-  font-variant: small-caps;
-  font-weight: bold;
+  /* font-variant: small-caps; */
+  /* font-weight: bold; */
   text-decoration: none;
 }
 
+.neon-text {
+  color: #fff;
+  text-shadow: 
+      0 0 2px #fff,
+      0 0 5px #fff,
+      0 0 10px #ff00ff,
+      0 0 15px #ff00ff,
+      0 0 20px #ff00ff;
+  animation: neonColors 5s infinite alternate;
+}
+
+@keyframes neonColors {
+  0% {
+      color: #ff00ff;
+      text-shadow: 
+          0 0 2px #ff00ff,
+          0 0 5px #ff00ff,
+          0 0 10px #ff00ff,
+          0 0 15px #ff00ff,
+          0 0 20px #ff00ff;
+  }
+  25% {
+      color: #00ffff;
+      text-shadow: 
+          0 0 2px #00ffff,
+          0 0 5px #00ffff,
+          0 0 10px #00ffff,
+          0 0 15px #00ffff,
+          0 0 20px #00ffff;
+  }
+  50% {
+      color: #00ff00;
+      text-shadow: 
+          0 0 2px #00ff00,
+          0 0 5px #00ff00,
+          0 0 10px #00ff00,
+          0 0 15px #00ff00,
+          0 0 20px #00ff00;
+  }
+  75% {
+      color: #ffff00;
+      text-shadow: 
+          0 0 2px #ffff00,
+          0 0 5px #ffff00,
+          0 0 10px #ffff00,
+          0 0 15px #ffff00,
+          0 0 20px #ffff00;
+  }
+  100% {
+      color: #ff00ff;
+      text-shadow: 
+          0 0 2px #ff00ff,
+          0 0 5px #ff00ff,
+          0 0 10px #ff00ff,
+          0 0 15px #ff00ff,
+          0 0 20px #ff00ff;
+  }
+}
 
 #nav-button {
   position: absolute;
