@@ -22,10 +22,7 @@ document.addEventListener("DOMContentLoaded", function () {
           updateCanvasFont(selectedFont);
       });
   });
-  document.getElementById('colorPicker').addEventListener('input', function () {
-    var selectedColor = this.value;
-    updateCanvasTextColor(selectedColor);
-  });
+  
 });
 
 /* Declare variable in global scope */
@@ -140,14 +137,6 @@ function updateCanvasSpeed(speed){
     startAnimation();
   }
 }
-function updateCanvasTextColor(color) {
-  textColor = color; 
-  if (animationId) {
-      cancelAnimationFrame(animationId); 
-      animationId = null;
-      startAnimation();   
-  }
-}
 // add background color picker function
 document.getElementById('backgroundColorPicker').addEventListener('input',function(){
   const canvas = document.getElementById("textCanvas");
@@ -156,13 +145,30 @@ document.getElementById('backgroundColorPicker').addEventListener('input',functi
 })
 
 document.getElementById('colorPicker').addEventListener('input',function(){
-  const tColor = this.value;
-  updateCanvasTextColor(tColor);
-})
-
+  let selectedColor = this.value;
+  updateCanvasTextColor(selectedColor);
+});
 function updateCanvasTextColor(color){
   textColor = color;
   if(animationId){
     startAnimation();
+  }
+}
+
+
+// filter and sort search bar
+function filterFunction() {
+  const searchInput = document.getElementById("myInput");
+  const filter = searchInput.value.toUpperCase();
+  const myDropdown = document.getElementById("fontSelector");
+  const a = myDropdown.getElementsByTagName("a");
+
+  for (let i = 0; i < a.length; i++) {
+    const txtValue = a[i].textContent || a[i].innerText;
+    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+      a[i].style.display = "";
+    } else {
+      a[i].style.display = "none";
+    }
   }
 }

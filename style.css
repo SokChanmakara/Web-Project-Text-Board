@@ -127,10 +127,11 @@ nav ul ul {
   display: none;
 }
 
+/*feature inside each button */
 nav ul .feat-show.show,
 nav ul .serv-show.show1 {
   display: block;
-  height: 100px;
+  height: 120px;
 }
 /* change scrollbar style */
 ::-webkit-scrollbar{
