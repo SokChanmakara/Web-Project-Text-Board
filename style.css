@@ -233,7 +233,7 @@ nav ul ul {
 nav ul .feat-show.show,
 nav ul .serv-show.show1 {
   display: block;
-  height: 120px;
+  height: 200px;
 }
 /* change scrollbar style */
 ::-webkit-scrollbar{

@@ -1,5 +1,4 @@
-document.addEventListener("DOMContentLoaded", function () { //Ensure code will run only HTML is loaded and parsed
-  // Navigation button and side bar
+document.addEventListener("DOMContentLoaded", function () {
   const navButton = document.getElementById('nav-button');
   const sidebar = document.getElementById('sidebar');
   
@@ -8,7 +7,6 @@ document.addEventListener("DOMContentLoaded", function () { //Ensure code will r
       navButton.classList.toggle('click');
   });
 
-  // Up down arrow rotate
   document.querySelectorAll('.feat-btn').forEach(btn => {
       btn.addEventListener('click', function () {
           this.nextElementSibling.classList.toggle('show');
@@ -24,36 +22,53 @@ document.addEventListener("DOMContentLoaded", function () { //Ensure code will r
           updateCanvasFont(selectedFont);
       });
   });
+
+  document.querySelectorAll('#sizeSelector a').forEach(function(sizeLink) {
+      sizeLink.addEventListener('click', function(event) {
+          event.preventDefault();
+          var selectedSize = this.getAttribute('data-size');
+          updateCanvasFontSize(selectedSize);
+      });
+  });
+
+  document.querySelectorAll('#speedSelector a').forEach(function(speedLink) {
+      speedLink.addEventListener('click', function(event) {
+          event.preventDefault();
+          var selectedSpeed = this.getAttribute('data-speed');
+          updateCanvasSpeed(selectedSpeed);
+      });
+  });
+
+  document.getElementById('backgroundColorPicker').addEventListener('input', function() {
+      const canvas = document.getElementById("textCanvas");
+      const color = this.value;
+      canvas.style.backgroundColor = color;
+  });
+
+  document.getElementById('colorPicker').addEventListener('input', function() {
+      let selectedColor = this.value;
+      updateCanvasTextColor(selectedColor);
+  });
   
 });
 
-/* Declare variable in global scope */
 let xPos;
 let animationId;
 let text = "";
 let textSize = 100;
-let textColor ="black";
+let textColor = "black";
 let textSpeed = 1;
-let currentFont = "Arial"; // Default font
+let currentFont = "Arial";
 
-
-/*
-window.devicePixelRatio is a property that returns the ratio of the resolution 
-in physical pixels to the resolution in CSS pixels for the current display device.
-
-The style.width and style.height properties of the canvas are set to 
-the element's original size in CSS pixels. This ensures that the canvas appears 
-to be the same size on the page, despite the increased resolution.
-*/
 function adjustCanvasResolution(canvas) {
-  const ratio = window.devicePixelRatio || 1; //Not define, default = 1
-  const rect = canvas.getBoundingClientRect(); //returns the size of the canvas element and its position relative to the viewport
+  const ratio = window.devicePixelRatio || 1;
+  const rect = canvas.getBoundingClientRect();
   canvas.width = rect.width * ratio;
   canvas.height = rect.height * ratio;
   canvas.style.width = `${rect.width}px`;
   canvas.style.height = `${rect.height}px`;
-  const context = canvas.getContext('2d'); //render 2d
-  context.scale(ratio, ratio); //scale the drawing (verticle and horizontal) make it clearer
+  const context = canvas.getContext('2d');
+  context.scale(ratio, ratio);
 }
 
 function startAnimation() {
@@ -103,71 +118,30 @@ function openFullscreen() {
   }
 }
 
-// document.getElementById("textCanvas").addEventListener("fullscreenchange", () => {
-//   if (!document.fullscreenElement) {
-//       cancelAnimationFrame(animationId);
-//       animationId = null;
-//   } else {
-//       startAnimation();
-//   }
-// });
-
-// function to change size
-document.querySelectorAll('#sizeSelector a').forEach(function(sizeLink){
-  sizeLink.addEventListener('click', function(event){
-    event.preventDefault();
-    const selectedSize = this.getAttribute('data-size');
-    updateCanvasFontSize(selectedSize);
-  })
-})
-
-// update the canvas 
-function updateCanvasFontSize(size){
+function updateCanvasFontSize(size) {
   textSize = size;
-  if(animationId){
-    cancelAnimationFrame(animationId);
-    animationId = null;
-    startAnimation();
+  if (animationId) {
+      cancelAnimationFrame(animationId);
+      animationId = null;
+      startAnimation();
   }
 }
 
-// function to change speed
-document.querySelectorAll('#speedSelector a').forEach(function(speedLink){
-  speedLink.addEventListener('click',function(event){
-    event.preventDefault();
-    const selectedSpeed = this.getAttribute('data-speed');
-    updateCanvasSpeed(selectedSpeed);
-  })
-})
-
-// update the canvas to adapted with selected speed
-function updateCanvasSpeed(speed){
+function updateCanvasSpeed(speed) {
   textSpeed = speed;
-  if(animationId){
-    animationId = null;
-    startAnimation();
+  if (animationId) {
+      animationId = null;
+      startAnimation();
   }
 }
-// add background color picker function
-document.getElementById('backgroundColorPicker').addEventListener('input',function(){
-  const canvas = document.getElementById("textCanvas");
-  const color = this.value;
-  canvas.style.backgroundColor = color;
-})
 
-document.getElementById('colorPicker').addEventListener('input',function(){
-  let selectedColor = this.value;
-  updateCanvasTextColor(selectedColor);
-});
-function updateCanvasTextColor(color){
+function updateCanvasTextColor(color) {
   textColor = color;
-  if(animationId){
-    startAnimation();
+  if (animationId) {
+      startAnimation();
   }
 }
 
-
-// filter and sort search bar
 function filterFunction() {
   const searchInput = document.getElementById("myInput");
   const filter = searchInput.value.toUpperCase();
@@ -175,11 +149,55 @@ function filterFunction() {
   const a = myDropdown.getElementsByTagName("a");
 
   for (let i = 0; i < a.length; i++) {
-    const txtValue = a[i].textContent || a[i].innerText;
-    if (txtValue.toUpperCase().indexOf(filter) > -1) {
-      a[i].style.display = "";
-    } else {
-      a[i].style.display = "none";
-    }
+      const txtValue = a[i].textContent || a[i].innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+          a[i].style.display = "";
+      } else {
+          a[i].style.display = "none";
+      }
   }
 }
+
+//function bouncing text
+
+var x = 100;
+var y = 200;
+var dx = 5;
+var dy = 5;
+var ctx, textWidth, textHeight;
+
+window.onload = function(){
+  var c = document.getElementById("textCanvas");
+  ctx = c.getContext("2d");
+  c.width = innerWidth * 0.95;
+  c.height = 450;
+}
+
+function animateBounceText(){
+  ctx.clearRect(0, 0, innerWidth * 0.95, 450);
+  ctx.font = `${textSize}px ${currentFont}`;
+  ctx.fillStyle = textColor;
+  ctx.fillText(text, x, y);
+  textWidth = ctx.measureText(text).width;
+  textHeight = textSize;
+
+  if (x + textWidth > innerWidth * 0.95 || x < 0) {
+    dx = -dx;
+  }
+  if (y > 450 || y - textHeight < 0) {
+    dy = -dy;
+  }
+
+  x += dx;
+  y += dy;
+
+  requestAnimationFrame(animateBounceText);
+}
+
+// Attach the event listener to the "Animation #2" button
+document.addEventListener("DOMContentLoaded", function() {
+  document.querySelector('a[href="#"]').addEventListener("click", function(event) {
+    event.preventDefault();
+    animateBounceText();
+  });
+});
