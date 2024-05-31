@@ -164,24 +164,40 @@ var x = 100;
 var y = 200;
 var dx = 5;
 var dy = 5;
+var ctx, textWidth, textHeight;
+
 window.onload = function(){
-  c = document.getElementById("canvas");
+  var c = document.getElementById("textCanvas");
   ctx = c.getContext("2d");
+  c.width = innerWidth * 0.95;
+  c.height = 450;
 }
+
 function animateBounceText(){
-  ctx.clearRect(0,0, innerWidth*0.95, 450);
+  ctx.clearRect(0, 0, innerWidth * 0.95, 450);
   ctx.font = `${textSize}px ${currentFont}`;
   ctx.fillStyle = textColor;
   ctx.fillText(text, x, y);
   textWidth = ctx.measureText(text).width;
   textHeight = textSize;
 
-  if(x<textSize || x>innerWidth*0.95){
+  if (x + textWidth > innerWidth * 0.95 || x < 0) {
     dx = -dx;
   }
-  if(y<textSize || y>450){
+  if (y > 450 || y - textHeight < 0) {
     dy = -dy;
   }
-  animateBounceText();
-  updateCanvasFontSize();
+
+  x += dx;
+  y += dy;
+
+  requestAnimationFrame(animateBounceText);
 }
+
+// Attach the event listener to the "Animation #2" button
+document.addEventListener("DOMContentLoaded", function() {
+  document.querySelector('a[href="#"]').addEventListener("click", function(event) {
+    event.preventDefault();
+    animateBounceText();
+  });
+});
