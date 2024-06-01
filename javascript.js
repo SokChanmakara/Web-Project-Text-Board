@@ -158,46 +158,68 @@ function filterFunction() {
   }
 }
 
-//function bouncing text
 
-var x = 100;
-var y = 200;
-var dx = 5;
-var dy = 5;
-var ctx, textWidth, textHeight;
+function animateBounceText() {
+  const canvas = document.getElementById("textCanvas");
+  const context = canvas.getContext("2d");
+  const rect = canvas.getBoundingClientRect();
 
-window.onload = function(){
-  var c = document.getElementById("textCanvas");
-  ctx = c.getContext("2d");
-  c.width = innerWidth * 0.95;
-  c.height = 450;
-}
+  let x = rect.width / 2;
+  let y = rect.height / 2;
+  let dx = 2;
+  let dy = 2;
 
-function animateBounceText(){
-  ctx.clearRect(0, 0, innerWidth * 0.95, 450);
-  ctx.font = `${textSize}px ${currentFont}`;
-  ctx.fillStyle = textColor;
-  ctx.fillText(text, x, y);
-  textWidth = ctx.measureText(text).width;
-  textHeight = textSize;
+  function drawText() {
+    context.clearRect(0, 0, rect.width, rect.height);
+    context.font = `${textSize}px ${currentFont}`;
+    context.fillStyle = textColor;
+    context.textAlign = "center";
+    context.fillText(text, x, y);
 
-  if (x + textWidth > innerWidth * 0.95 || x < 0) {
-    dx = -dx;
+    if (x + context.measureText(text).width / 2 > rect.width || x - context.measureText(text).width / 2 < 0) {
+      dx = -dx;
+    }
+    if (y + textSize / 2 > rect.height || y - textSize / 2 < 0) {
+      dy = -dy;
+    }
+
+    x += dx;
+    y += dy;
+
+    requestAnimationFrame(drawText);
   }
-  if (y > 450 || y - textHeight < 0) {
-    dy = -dy;
-  }
 
-  x += dx;
-  y += dy;
-
-  requestAnimationFrame(animateBounceText);
+  drawText();
 }
 
 // Attach the event listener to the "Animation #2" button
-document.addEventListener("DOMContentLoaded", function() {
-  document.querySelector('a[href="#"]').addEventListener("click", function(event) {
+document.addEventListener("DOMContentLoaded", function () {
+  document.querySelector('a[href="#"]').addEventListener("click", function (event) {
     event.preventDefault();
     animateBounceText();
   });
 });
+
+function animateWaveText() {
+  const canvas = document.getElementById("textCanvas");
+  const context = canvas.getContext("2d");
+  context.clearRect(0, 0, canvas.width, canvas.height);
+  context.font = `${textSize}px ${currentFont}`;
+  context.fillStyle = textColor;
+  context.textAlign = "left";
+
+  const waveOffset = Math.sin(Date.now() / 100) * (canvas.height / 4);
+
+  context.fillText(
+    text,
+    xPos,
+    canvas.height / 2 / (window.devicePixelRatio || 1) + waveOffset
+  );
+
+  xPos -= textSpeed;
+  if (xPos + context.measureText(text).width < 0) {
+    xPos = canvas.width / (window.devicePixelRatio || 1);
+  }
+
+  animationId = requestAnimationFrame(animateWaveText);
+}
