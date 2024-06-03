@@ -81,20 +81,7 @@ function startAnimation() {
   }
 }
 
-function animateText() {
-  const canvas = document.getElementById("textCanvas");
-  const context = canvas.getContext("2d");
-  context.clearRect(0, 0, canvas.width, canvas.height);
-  context.font = `${textSize}px ${currentFont}`;
-  context.fillStyle = textColor;
-  context.textAlign = "left";
-  context.fillText(text, xPos, canvas.height / 2 / (window.devicePixelRatio || 1));
-  xPos -= textSpeed;
-  if (xPos + context.measureText(text).width < 0) {
-      xPos = canvas.width / (window.devicePixelRatio || 1);
-  }
-  animationId = requestAnimationFrame(animateText);
-}
+
 
 function updateCanvasFont(font) {
   currentFont = font;
@@ -158,6 +145,21 @@ function filterFunction() {
   }
 }
 
+function animateText() {
+  const canvas = document.getElementById("textCanvas");
+  const context = canvas.getContext("2d");
+  context.clearRect(0, 0, canvas.width, canvas.height);
+  context.font = `${textSize}px ${currentFont}`;
+  context.fillStyle = textColor;
+  context.textAlign = "left";
+  context.fillText(text, xPos, canvas.height / 2 / (window.devicePixelRatio || 1));
+  xPos -= textSpeed;
+  if (xPos + context.measureText(text).width < 0) {
+      xPos = canvas.width / (window.devicePixelRatio || 1);
+  }
+  animationId = requestAnimationFrame(animateText);
+}
+
 
 function animateBounceText() {
   const canvas = document.getElementById("textCanvas");
@@ -192,13 +194,6 @@ function animateBounceText() {
   drawText();
 }
 
-// Attach the event listener to the "Animation #2" button
-document.addEventListener("DOMContentLoaded", function () {
-  document.querySelector('a[href="#"]').addEventListener("click", function (event) {
-    event.preventDefault();
-    animateBounceText();
-  });
-});
 
 function animateWaveText() {
   const canvas = document.getElementById("textCanvas");
@@ -222,4 +217,32 @@ function animateWaveText() {
   }
 
   animationId = requestAnimationFrame(animateWaveText);
+}
+
+function animateNeonText() {
+  const canvas = document.getElementById("textCanvas");
+  const context = canvas.getContext("2d");
+  context.clearRect(0, 0, canvas.width, canvas.height);
+  context.font = `${textSize}px ${currentFont}`;
+
+  // Create a gradient for neon effect with multiple colors
+  const gradient = context.createLinearGradient(0, 0, canvas.width, 0);
+  gradient.addColorStop("0", "blue");
+  gradient.addColorStop("0.3", "lime");
+  gradient.addColorStop("0.5", "magenta");
+  gradient.addColorStop("0.7", "orange");
+  gradient.addColorStop("1.0", "purple");
+
+  // Apply the gradient as the fill style
+  context.fillStyle = gradient;
+  context.textAlign = "left";
+
+  context.fillText(text, xPos, canvas.height / 2 / (window.devicePixelRatio || 1));
+
+  xPos -= textSpeed;
+  if (xPos + context.measureText(text).width < 0) {
+    xPos = canvas.width / (window.devicePixelRatio || 1);
+  }
+
+  animationId = requestAnimationFrame(animateNeonText);
 }
