@@ -1,3 +1,7 @@
+const canvas = document.querySelector('canvas');
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight * 0.70;
+
 document.addEventListener("DOMContentLoaded", function () {
   const navButton = document.getElementById('nav-button');
   const sidebar = document.getElementById('sidebar');
@@ -216,7 +220,7 @@ function animateBounceText() {
       if (x + context.measureText(text).width / 2 > rect.width || x - context.measureText(text).width / 2 < 0) {
           dx = -dx;
       }
-      if (y + textSize / 2 > rect.height || y - textSize / 2 < 0) {
+      if (y + textSize/2 > rect.height || y - textSize < 0) {
           dy = -dy;
       }
 
