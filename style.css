@@ -23,6 +23,7 @@ header {
   margin-top: 10px;
   margin-left:500px;  
   margin-right:500px;
+  /* background-color: #00ff00; */
 }
 header:hover{
   animation: shake 0.5s infinite;
@@ -293,7 +294,7 @@ nav ul li a i.rotate {
 }
 
 #textInput {
-  width: 50em;
+  width: 65em;
   height: 2.5em;
   border: 2px solid black;
   border-radius: 10px;
@@ -330,9 +331,233 @@ audio{
 canvas {
   display: block;
   border-radius: 20px;
+  width: 100%;
+  height: 100%;
 }
 
 canvas:fullscreen {
   width: 100%;
   height: 100%;
+}
+
+/* General mobile styles */
+@media (max-width: 768px) {
+  body {
+    background-color: #3b3b3b;
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    user-select: none;
+    box-sizing: border-box;
+  }
+  
+  header {
+    font-size: 3em; /* Reduced font size for mobile */
+    display: flex;
+    justify-content: center;
+    /* margin: 200px 200px; Simplified margin for mobile */
+    margin-left: 100px;
+    margin-right: 100px;
+  }
+
+  header:hover{
+    animation: none
+  }
+  
+
+  span {
+    font-style: italic;
+    font-variant: small-caps;
+    text-decoration: none;
+  }
+
+  
+  #nav-button {
+    position: absolute;
+    top: 15px; /* Adjusted for mobile */
+    left: 25px; /* Adjusted for mobile */
+    height: 35px; /* Adjusted for mobile */
+    width: 35px; /* Adjusted for mobile */
+    text-align: center;
+    background: #1b1b1b;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: left 0.4s ease;
+    color: white;
+    font-size: 22px; /* Adjusted for mobile */
+    line-height: 35px; /* Adjusted for mobile */
+  }
+  
+  #nav-button.click {
+    left: 325px; /* Adjusted for mobile */
+  }
+  
+  .sidebar {
+    position: fixed;
+    width: 300px; /* Adjusted for mobile */
+    height: 100%;
+    left: -300px; /* Adjusted for mobile */
+    background: #1b1b1b;
+    transition: left 0.4s ease;
+    margin-top: -20px;
+  }
+  
+  .sidebar.show {
+    left: 0px;
+  }
+  
+  .sidebar .text {
+    color: white;
+    font-size: 20px; /* Adjusted for mobile */
+    font-weight: 600;
+    line-height: 50px; /* Adjusted for mobile */
+    text-align: center;
+    background: #1e1e1e;
+    letter-spacing: 1px;
+  }
+  
+  nav ul {
+    background: #1b1b1b;
+    height: 100%;
+    width: 100%;
+    list-style: none;
+    overflow:auto;
+  }
+  
+  nav ul li {
+    line-height: 50px; /* Adjusted for mobile */
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  nav ul li:last-child {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+  
+  nav ul li a:focus {
+    color: cyan;
+    background: #1e1e1e;
+    border-left-color: cyan;
+  }
+  
+  nav ul li a {
+    position: relative;
+    color: white;
+    text-decoration: none;
+    font-size: 16px; /* Adjusted for mobile */
+    padding-left: 30px; /* Adjusted for mobile */
+    font-weight: 500;
+    display: block;
+    width: 100%;
+    border-left: 3px solid transparent;
+  }
+  
+  nav ul li a:hover {
+    background: #1e1e1e;
+  }
+  
+  nav ul ul {
+    position: static;
+    display: none;
+  }
+  
+  nav ul .feat-show.show,
+  nav ul .serv-show.show1 {
+    display: block;
+    height: 200px;
+  }
+  
+  ::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 10px;
+    border: 3px solid #1b1b1b;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: cyan; 
+  }
+  
+  nav ul ul li {
+    line-height: 42px;
+    border-top: none;
+  }
+  
+  nav ul ul li a {
+    font-size: 14px; /* Adjusted for mobile */
+    color: #e6e6e6;
+    padding-left: 60px; /* Adjusted for mobile */
+  }
+  
+  nav ul li.active ul li a {
+    color: #e6e6e6;
+    background: #1b1b1b;
+    border-left-color: transparent;
+  }
+  
+  nav ul ul li a:hover {
+    color: cyan !important;
+    background: #1e1e1e !important;
+  }
+  
+  nav ul li a i {
+    position: absolute;
+    top: 50%;
+    right: 15px; /* Adjusted for mobile */
+    transform: translateY(-50%);
+    font-size: 18px; /* Adjusted for mobile */
+    transition: transform 0.4s;
+  }
+  
+  nav ul li a i.rotate {
+    transform: translateY(-50%) rotate(-180deg);
+  }
+  
+  .input-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+    margin-bottom: 30px;
+  }
+  
+  #textInput {
+    width: 25em; /* Adjusted for mobile */
+    height: 2em; /* Adjusted for mobile */
+    border: 2px solid black;
+    border-radius: 10px;
+    padding-left: 10px; /* Adjusted for mobile */
+    background-color: #ffffff;
+    margin-top: 30px;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    outline: none;
+  }
+  
+  #textInput:focus {
+    border: 3px solid cyan;
+  }
+  
+  input[type="color"] {
+    border: none;
+    width: 25px;
+    height: 25px;
+  }
+  
+  audio {
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 10px;
+    border: none;
+    border-radius: 5px;
+    padding: 5px;
+  }
+  
+  canvas:fullscreen {
+    width: 100%;
+    height: 100%;
+  }
 }
