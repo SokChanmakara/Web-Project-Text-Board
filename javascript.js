@@ -1,6 +1,6 @@
 const canvas = document.querySelector('canvas');
 canvas.width = window.innerWidth;
-canvas.height = window.innerHeight * 0.70;
+canvas.height = window.innerHeight * 0.69;  
 
 document.addEventListener("DOMContentLoaded", function () {
   const navButton = document.getElementById('nav-button');
