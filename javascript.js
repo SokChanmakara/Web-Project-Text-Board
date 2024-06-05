@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
   const navButton = document.getElementById('nav-button');
   const sidebar = document.getElementById('sidebar');
-  
+
   navButton.addEventListener('click', function () {
       sidebar.classList.toggle('show');
       navButton.classList.toggle('click');
@@ -49,7 +49,28 @@ document.addEventListener("DOMContentLoaded", function () {
       let selectedColor = this.value;
       updateCanvasTextColor(selectedColor);
   });
-  
+
+  const backgroundImageButton = document.getElementById('backgroundImageButton');
+  const backgroundImagePicker = document.getElementById('backgroundImagePicker');
+
+  backgroundImageButton.addEventListener('click', function() {
+      backgroundImagePicker.click();
+  });
+
+  backgroundImagePicker.addEventListener('change', function(event) {
+      const file = event.target.files[0];
+      if (file) {
+          const reader = new FileReader();
+          reader.onload = function(e) {
+              const img = new Image();
+              img.onload = function() {
+                  setBackgroundAndAnimate(img);
+              };
+              img.src = e.target.result;
+          };
+          reader.readAsDataURL(file);
+      }
+  });
 });
 
 let xPos;
@@ -59,6 +80,7 @@ let textSize = 100;
 let textColor = "black";
 let textSpeed = 1;
 let currentFont = "Arial";
+let backgroundImage = null;
 
 function adjustCanvasResolution(canvas) {
   const ratio = window.devicePixelRatio || 1;
@@ -81,7 +103,35 @@ function startAnimation() {
   }
 }
 
+function setBackgroundAndAnimate(img) {
+  backgroundImage = img;
+  if (animationId) {
+      cancelAnimationFrame(animationId);
+  }
+  startAnimation();
+}
 
+function drawBackground(context, canvas) {
+  if (backgroundImage) {
+      context.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
+  }
+}
+
+function animateText() {
+  const canvas = document.getElementById("textCanvas");
+  const context = canvas.getContext("2d");
+  context.clearRect(0, 0, canvas.width, canvas.height);
+  drawBackground(context, canvas);
+  context.font = `${textSize}px ${currentFont}`;
+  context.fillStyle = textColor;
+  context.textAlign = "left";
+  context.fillText(text, xPos, canvas.height / 2 / (window.devicePixelRatio || 1));
+  xPos -= textSpeed;
+  if (xPos + context.measureText(text).width < 0) {
+      xPos = canvas.width / (window.devicePixelRatio || 1);
+  }
+  animationId = requestAnimationFrame(animateText);
+}
 
 function updateCanvasFont(font) {
   currentFont = font;
@@ -145,22 +195,6 @@ function filterFunction() {
   }
 }
 
-function animateText() {
-  const canvas = document.getElementById("textCanvas");
-  const context = canvas.getContext("2d");
-  context.clearRect(0, 0, canvas.width, canvas.height);
-  context.font = `${textSize}px ${currentFont}`;
-  context.fillStyle = textColor;
-  context.textAlign = "left";
-  context.fillText(text, xPos, canvas.height / 2 / (window.devicePixelRatio || 1));
-  xPos -= textSpeed;
-  if (xPos + context.measureText(text).width < 0) {
-      xPos = canvas.width / (window.devicePixelRatio || 1);
-  }
-  animationId = requestAnimationFrame(animateText);
-}
-
-
 function animateBounceText() {
   const canvas = document.getElementById("textCanvas");
   const context = canvas.getContext("2d");
@@ -172,33 +206,34 @@ function animateBounceText() {
   let dy = 2;
 
   function drawText() {
-    context.clearRect(0, 0, rect.width, rect.height);
-    context.font = `${textSize}px ${currentFont}`;
-    context.fillStyle = textColor;
-    context.textAlign = "center";
-    context.fillText(text, x, y);
+      context.clearRect(0, 0, rect.width, rect.height);
+      drawBackground(context, canvas);
+      context.font = `${textSize}px ${currentFont}`;
+      context.fillStyle = textColor;
+      context.textAlign = "center";
+      context.fillText(text, x, y);
 
-    if (x + context.measureText(text).width / 2 > rect.width || x - context.measureText(text).width / 2 < 0) {
-      dx = -dx;
-    }
-    if (y + textSize / 2 > rect.height || y - textSize / 2 < 0) {
-      dy = -dy;
-    }
+      if (x + context.measureText(text).width / 2 > rect.width || x - context.measureText(text).width / 2 < 0) {
+          dx = -dx;
+      }
+      if (y + textSize / 2 > rect.height || y - textSize / 2 < 0) {
+          dy = -dy;
+      }
 
-    x += dx;
-    y += dy;
+      x += dx;
+      y += dy;
 
-    requestAnimationFrame(drawText);
+      requestAnimationFrame(drawText);
   }
 
   drawText();
 }
 
-
 function animateWaveText() {
   const canvas = document.getElementById("textCanvas");
   const context = canvas.getContext("2d");
   context.clearRect(0, 0, canvas.width, canvas.height);
+  drawBackground(context, canvas);
   context.font = `${textSize}px ${currentFont}`;
   context.fillStyle = textColor;
   context.textAlign = "left";
@@ -206,22 +241,22 @@ function animateWaveText() {
   const waveOffset = Math.sin(Date.now() / 100) * (canvas.height / 4);
 
   context.fillText(
-    text,
-    xPos,
-    canvas.height / 2 / (window.devicePixelRatio || 1) + waveOffset
+      text,
+      xPos,
+      canvas.height / 2 / (window.devicePixelRatio || 1) + waveOffset
   );
 
   xPos -= textSpeed;
   if (xPos + context.measureText(text).width < 0) {
-    xPos = canvas.width / (window.devicePixelRatio || 1);
+      xPos = canvas.width / (window.devicePixelRatio || 1);
   }
 
   animationId = requestAnimationFrame(animateWaveText);
 }
-
 function animateNeonText() {
   const canvas = document.getElementById("textCanvas");
   const context = canvas.getContext("2d");
+  drawBackground(context, canvas);
   context.clearRect(0, 0, canvas.width, canvas.height);
   context.font = `${textSize}px ${currentFont}`;
 
@@ -268,3 +303,4 @@ function animateFadeText() {
 
   animationId = requestAnimationFrame(animateFadeText);
 }
+
