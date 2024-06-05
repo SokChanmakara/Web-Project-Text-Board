@@ -281,3 +281,26 @@ function animateNeonText() {
 
   animationId = requestAnimationFrame(animateNeonText);
 }
+
+function animateFadeText() {
+  const canvas = document.getElementById("textCanvas");
+  const context = canvas.getContext("2d");
+  context.clearRect(0, 0, canvas.width, canvas.height);
+  context.font = `${textSize}px ${currentFont}`;
+  context.fillStyle = textColor;
+  context.textAlign = "left";
+
+  const opacity = Math.abs(Math.sin(Date.now() * 0.001));
+
+  context.globalAlpha = opacity;
+  context.fillText(text, xPos, canvas.height / 2 / (window.devicePixelRatio || 1));
+  context.globalAlpha = 1;
+
+  xPos -= textSpeed;
+  if (xPos + context.measureText(text).width < 0) {
+    xPos = canvas.width / (window.devicePixelRatio || 1);
+  }
+
+  animationId = requestAnimationFrame(animateFadeText);
+}
+
