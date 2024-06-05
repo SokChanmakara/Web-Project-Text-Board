@@ -17,24 +17,126 @@ body {
 }
 
 header {
+  font-size: 4rem;
   display: flex;
   justify-content: center;
-  margin-top: 20px;
+  margin-top: 10px;
+  margin-left:500px;  
+  margin-right:500px;
+}
+header:hover{
+  animation: shake 0.5s infinite;
 }
 
-h1 {
-  color: yellow;
-  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+@keyframes shake {
+  0% {
+    transform: translate(1px, -2px) rotate(-1deg);
+  }
+  10% {
+    transform: translate(-1px, 2px) rotate(-1deg);
+  }
+  20% {
+    transform: translate(1px, 2px) rotate(0deg);
+  }
+  30% {
+    transform: translate(3px, 2px) rotate(0deg);
+  }
+  40% {
+    transform: translate(1px, -1px) rotate(1deg);
+  }
+  50% {
+    transform: translate(-1px, -2px) rotate(-1deg);
+  }
+  60% {
+    transform: translate(-3px, 1px) rotate(0deg);
+  }
+  70% {
+    transform: translate(3px, 1px) rotate(-1deg);
+  }
+  80% {
+    transform: translate(-1px, -1px) rotate(1deg);
+  }
+  90% {
+    transform: translate(-3px, 0px) rotate(1deg);
+  }
+  100% {
+    transform: translate(1px, 1px) rotate(0deg);
+  }
+}
+
+
+span {
+  /* color: yellow; */
+  /* font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; */
   font-style: italic;
   font-variant: small-caps;
-  font-weight: bold;
-  text-decoration: underline;
-  text-decoration-color: white;
+  /* font-weight: bold; */
+  text-decoration: none;
+}
+
+.neon-text {
+  color: #fff;
+  /* font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif; */
+  text-shadow: 
+      0 0 2px #fff,
+      0 0 5px #fff,
+      0 0 10px #ff00ff,
+      0 0 15px #ff00ff,
+      0 0 20px #ff00ff;
+  animation: neonColors 5s infinite alternate;
+}
+
+@keyframes neonColors {
+  0% {
+      color: #ff00ff;
+      text-shadow: 
+          0 0 2px #ff00ff,
+          0 0 5px #ff00ff,
+          0 0 10px #ff00ff,
+          0 0 15px #ff00ff,
+          0 0 20px #ff00ff;
+  }
+  25% {
+      color: #00ffff;
+      text-shadow: 
+          0 0 2px #00ffff,
+          0 0 5px #00ffff,
+          0 0 10px #00ffff,
+          0 0 15px #00ffff,
+          0 0 20px #00ffff;
+  }
+  50% {
+      color: #00ff00;
+      text-shadow: 
+          0 0 2px #00ff00,
+          0 0 5px #00ff00,
+          0 0 10px #00ff00,
+          0 0 15px #00ff00,
+          0 0 20px #00ff00;
+  }
+  75% {
+      color: #ffff00;
+      text-shadow: 
+          0 0 2px #ffff00,
+          0 0 5px #ffff00,
+          0 0 10px #ffff00,
+          0 0 15px #ffff00,
+          0 0 20px #ffff00;
+  }
+  100% {
+      color: #ff00ff;
+      text-shadow: 
+          0 0 2px #ff00ff,
+          0 0 5px #ff00ff,
+          0 0 10px #ff00ff,
+          0 0 15px #ff00ff,
+          0 0 20px #ff00ff;
+  }
 }
 
 #nav-button {
   position: absolute;
-  top: 15px;
+  top: 25px;
   left: 45px;
   height: 45px;
   width: 45px;
@@ -87,6 +189,7 @@ nav ul {
 nav ul li {
   line-height: 60px;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
+
 }
 
 nav ul li:last-child {
@@ -126,9 +229,25 @@ nav ul ul {
   display: none;
 }
 
+/*feature inside each button */
 nav ul .feat-show.show,
 nav ul .serv-show.show1 {
   display: block;
+  height: 200px;
+}
+/* change scrollbar style */
+::-webkit-scrollbar{
+  width: 12px;
+  height: 12px;
+ 
+}
+::-webkit-scrollbar-thumb{
+  background-color: #888;
+  border-radius: 10px;
+  border: 3px solid #1b1b1b;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: cyan; 
 }
 
 nav ul ul li {
@@ -176,10 +295,18 @@ nav ul li a i.rotate {
 #textInput {
   width: 50em;
   height: 2.5em;
+  border: 2px solid black;
   border-radius: 10px;
   padding-left: 15px;
-  background-color: #F9F1CB;
+  background-color: #ffffff;
   margin-top: 30px;
+  -webkit-transition: 0.5s ;
+  transition: 0.5s;
+  outline: none;
+}
+
+#textInput:focus{
+  border: 3px solid cyan;
 }
 
 /* style the color picker */
@@ -189,12 +316,19 @@ input[type="color"] {
 	height: 25px;
 
 }
+/* style the audio controls */
+audio{
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: 10px;
+  border: none;
+  border-radius: 5px;
+  padding: 5px;
+}
+
 canvas {
   display: block;
-  margin-left: auto;
-  margin-right: auto;
-  width: 95%;
-  height: 450px;
   border-radius: 20px;
 }
 
