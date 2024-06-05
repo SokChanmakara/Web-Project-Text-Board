@@ -1,3 +1,7 @@
+const canvas = document.querySelector('canvas');
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight * 0.69;  
+
 document.addEventListener("DOMContentLoaded", function () {
   const navButton = document.getElementById('nav-button');
   const sidebar = document.getElementById('sidebar');
@@ -71,7 +75,16 @@ document.addEventListener("DOMContentLoaded", function () {
           reader.readAsDataURL(file);
       }
   });
+
+  document.getElementById("animationSelector").addEventListener('click', (event)=>{
+    if(event.target.tagName === 'A'){
+        currentAnimation = event.target.getAttribute("data-animation");
+        startAnimation();
+    }
+  })
+
 });
+
 
 let xPos;
 let animationId;
@@ -81,6 +94,7 @@ let textColor = "black";
 let textSpeed = 1;
 let currentFont = "Arial";
 let backgroundImage = null;
+let currentAnimation = 'default';
 
 function adjustCanvasResolution(canvas) {
   const ratio = window.devicePixelRatio || 1;
@@ -93,15 +107,77 @@ function adjustCanvasResolution(canvas) {
   context.scale(ratio, ratio);
 }
 
-function startAnimation() {
-  const canvas = document.getElementById("textCanvas");
-  adjustCanvasResolution(canvas);
-  text = document.getElementById("textInput").value;
-  if (!animationId) {
-      xPos = canvas.width / (window.devicePixelRatio || 1); 
-      animateText();
+//function update
+function updateCanvasFont(font) {
+    currentFont = font;
+    if (animationId) {
+        cancelAnimationFrame(animationId);
+        animationId = null;
+        startAnimation();
+    }
   }
-}
+  
+  function openFullscreen() {
+    const elem = document.getElementById("textCanvas");
+    if (elem.requestFullscreen) {
+        elem.requestFullscreen();
+    } else if (elem.mozRequestFullScreen) {
+        elem.mozRequestFullScreen();
+    } else if (elem.webkitRequestFullscreen) {
+        elem.webkitRequestFullscreen();
+    } else if (elem.msRequestFullscreen) {
+        elem.msRequestFullscreen();
+    }
+  }
+  
+  function updateCanvasFontSize(size) {
+    textSize = size;
+    if (animationId) {
+        cancelAnimationFrame(animationId);
+        animationId = null;
+        startAnimation();
+    }
+  }
+  
+  function updateCanvasSpeed(speed) {
+    textSpeed = speed;
+    if (animationId = requestAnimationFrame(animateText)) {
+        animationId = null;
+        startAnimation();
+    }else if(animationId = requestAnimationFrame(animateBounceText)){
+        animationId = null;
+        animateBounceText();
+    }else if (animationId = requestAnimationFrame(animateWaveText)){
+        animationId = null;
+        animateWaveText();
+    }
+  }
+  
+  function updateCanvasTextColor(color) {
+    textColor = color;
+    if (animationId) {
+        startAnimation();
+    }
+  }
+  
+  function filterFunction() {
+    const searchInput = document.getElementById("myInput");
+    const filter = searchInput.value.toUpperCase();
+    const myDropdown = document.getElementById("fontSelector");
+    const a = myDropdown.getElementsByTagName("a");
+  
+    for (let i = 0; i < a.length; i++) {
+        const txtValue = a[i].textContent || a[i].innerText;
+        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+            a[i].style.display = "";
+        } else {
+            a[i].style.display = "none";
+        }
+    }
+  }
+  
+
+//set background
 
 function setBackgroundAndAnimate(img) {
   backgroundImage = img;
@@ -110,13 +186,28 @@ function setBackgroundAndAnimate(img) {
   }
   startAnimation();
 }
-
+//draw background
 function drawBackground(context, canvas) {
   if (backgroundImage) {
       context.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
   }
 }
 
+function startAnimation() {
+    text = document.getElementById("textInput").value;
+    cancelAnimationFrame(animationId);
+    xPos = document.getElementById("textCanvas").width;
+    if(currentAnimation === 'default'){
+        animateText();
+    }else if(currentAnimation === 'bounce'){
+        animateBounceText();
+    }else if(currentAnimation === 'wave'){
+        animateWaveText();
+    }else if(currentAnimation === 'neon'){
+        animateNeonText();
+    }
+  }
+  
 function animateText() {
   const canvas = document.getElementById("textCanvas");
   const context = canvas.getContext("2d");
@@ -133,67 +224,6 @@ function animateText() {
   animationId = requestAnimationFrame(animateText);
 }
 
-function updateCanvasFont(font) {
-  currentFont = font;
-  if (animationId) {
-      cancelAnimationFrame(animationId);
-      animationId = null;
-      startAnimation();
-  }
-}
-
-function openFullscreen() {
-  const elem = document.getElementById("textCanvas");
-  if (elem.requestFullscreen) {
-      elem.requestFullscreen();
-  } else if (elem.mozRequestFullScreen) {
-      elem.mozRequestFullScreen();
-  } else if (elem.webkitRequestFullscreen) {
-      elem.webkitRequestFullscreen();
-  } else if (elem.msRequestFullscreen) {
-      elem.msRequestFullscreen();
-  }
-}
-
-function updateCanvasFontSize(size) {
-  textSize = size;
-  if (animationId) {
-      cancelAnimationFrame(animationId);
-      animationId = null;
-      startAnimation();
-  }
-}
-
-function updateCanvasSpeed(speed) {
-  textSpeed = speed;
-  if (animationId) {
-      animationId = null;
-      startAnimation();
-  }
-}
-
-function updateCanvasTextColor(color) {
-  textColor = color;
-  if (animationId) {
-      startAnimation();
-  }
-}
-
-function filterFunction() {
-  const searchInput = document.getElementById("myInput");
-  const filter = searchInput.value.toUpperCase();
-  const myDropdown = document.getElementById("fontSelector");
-  const a = myDropdown.getElementsByTagName("a");
-
-  for (let i = 0; i < a.length; i++) {
-      const txtValue = a[i].textContent || a[i].innerText;
-      if (txtValue.toUpperCase().indexOf(filter) > -1) {
-          a[i].style.display = "";
-      } else {
-          a[i].style.display = "none";
-      }
-  }
-}
 
 function animateBounceText() {
   const canvas = document.getElementById("textCanvas");
@@ -202,8 +232,8 @@ function animateBounceText() {
 
   let x = rect.width / 2;
   let y = rect.height / 2;
-  let dx = 2;
-  let dy = 2;
+  let dx = textSpeed;
+  let dy = textSpeed;
 
   function drawText() {
       context.clearRect(0, 0, rect.width, rect.height);
@@ -216,14 +246,14 @@ function animateBounceText() {
       if (x + context.measureText(text).width / 2 > rect.width || x - context.measureText(text).width / 2 < 0) {
           dx = -dx;
       }
-      if (y + textSize / 2 > rect.height || y - textSize / 2 < 0) {
+      if (y + textSize/2 > rect.height || y - textSize < 0) {
           dy = -dy;
       }
 
-      x += dx;
-      y += dy;
+      x += dx*textSpeed;
+      y += dy*textSpeed;
 
-      requestAnimationFrame(drawText);
+      animationId = requestAnimationFrame(drawText);
   }
 
   drawText();
