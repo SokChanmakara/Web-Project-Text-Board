@@ -83,7 +83,27 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   })
 
+  const canvas = document.getElementById('textCanvas');
+  adjustCanvasForMobile(canvas);
+  window.addEventListener('resize', () => adjustCanvasForMobile(canvas));
+  
+
 });
+
+function adjustCanvasForMobile(canvas) {
+    const isMobile = window.innerWidth <= 768;
+    if (isMobile) {
+        canvas.style.transform = 'rotate(90deg)';
+        canvas.style.transformOrigin = 'bottom left';
+        canvas.width = window.innerHeight;
+        canvas.height = window.innerWidth;
+    } else {
+        canvas.style.transform = '';
+        canvas.style.transformOrigin = '';
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight * 0.69;
+    }
+}
 
 
 let xPos;
@@ -210,20 +230,22 @@ function startAnimation() {
     }
   }
   
+// Update the animation function to scroll from bottom to top
 function animateText() {
-  const canvas = document.getElementById("textCanvas");
-  const context = canvas.getContext("2d");
-  context.clearRect(0, 0, canvas.width, canvas.height);
-  drawBackground(context, canvas);
-  context.font = `${textSize}px ${currentFont}`;
-  context.fillStyle = textColor;
-  context.textAlign = "left";
-  context.fillText(text, xPos, canvas.height / 2 / (window.devicePixelRatio || 1));
-  xPos -= textSpeed;
-  if (xPos + context.measureText(text).width < 0) {
-      xPos = canvas.width / (window.devicePixelRatio || 1);
-  }
-  animationId = requestAnimationFrame(animateText);
+    const canvas = document.getElementById('textCanvas');
+    const context = canvas.getContext('2d');
+    context.clearRect(0, 0, canvas.width, canvas.height);
+
+    xPos -= textSpeed;
+    if (xPos + context.measureText(text).width < 0) {
+        xPos = canvas.width;
+    }
+
+    context.font = `${textSize}px ${currentFont}`;
+    context.fillStyle = textColor;
+    context.fillText(text, xPos, canvas.height / 2);
+
+    animationId = requestAnimationFrame(animateText);
 }
 
 

@@ -356,8 +356,8 @@ canvas:fullscreen {
     display: flex;
     justify-content: center;
     /* margin: 200px 200px; Simplified margin for mobile */
-    margin-left: 100px;
-    margin-right: 100px;
+    margin-left: 40px;
+    margin-right: 40px;
   }
 
   header:hover{
@@ -375,7 +375,7 @@ canvas:fullscreen {
   #nav-button {
     position: absolute;
     top: 15px; /* Adjusted for mobile */
-    left: 25px; /* Adjusted for mobile */
+    left: 10px; /* Adjusted for mobile */
     height: 35px; /* Adjusted for mobile */
     width: 35px; /* Adjusted for mobile */
     text-align: center;
@@ -389,21 +389,23 @@ canvas:fullscreen {
   }
   
   #nav-button.click {
-    left: 325px; /* Adjusted for mobile */
+    left: 300px; /* Adjusted for mobile */
   }
   
-  .sidebar {
+  #sidebar {
     position: fixed;
-    width: 300px; /* Adjusted for mobile */
+    z-index: 10;
+    top: 0;
+    left: 0;
+    width: 250px; /* Adjust as per your design */
     height: 100%;
-    left: -300px; /* Adjusted for mobile */
-    background: #1b1b1b;
-    transition: left 0.4s ease;
-    margin-top: -20px;
-  }
+    background-color: #fff; /* Adjust as needed */
+    transition: transform 0.3s ease;
+    transform: translateX(-100%);
+}
   
-  .sidebar.show {
-    left: 0px;
+  #sidebar.show {
+    transform: translateX(0);
   }
   
   .sidebar .text {
@@ -520,7 +522,7 @@ canvas:fullscreen {
     display: flex;
     justify-content: center;
     margin-top: 15px;
-    margin-bottom: 30px;
+    margin-bottom: 0px;
   }
   
   #textInput {
@@ -560,4 +562,20 @@ canvas:fullscreen {
     width: 100%;
     height: 100%;
   }
+
+  #textCanvas {
+    transform: rotate(90deg);
+    transform-origin: bottom left;
+    width: 100vh; /* Full height of the viewport */
+    height: 100vw; /* Full width of the viewport */
+    overflow: hidden;
+    display: block;
+    margin-top: 20px;
+    position: relative;
+    z-index: 1;
+    top: -400px;
+    left: 0;
+
+
+}
 }
