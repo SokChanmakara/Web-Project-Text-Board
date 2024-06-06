@@ -565,7 +565,7 @@ canvas:fullscreen {
 
   #textCanvas {
     transform: rotate(90deg);
-    transform-origin: bottom left;
+    transform-origin: center;
     width: 100vh; /* Full height of the viewport */
     height: 100vw; /* Full width of the viewport */
     overflow: hidden;

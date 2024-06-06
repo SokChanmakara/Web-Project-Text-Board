@@ -170,6 +170,12 @@ function updateCanvasFont(font) {
     }else if (animationId = requestAnimationFrame(animateWaveText)){
         animationId = null;
         animateWaveText();
+    }else if (animationId = requestAnimationFrame(animateNeonText)){
+        animationId = null;
+        animateNeonText();
+    }else if (animationId = requestAnimationFrame(animateFadeText)){
+        animationId = null;
+        animateFadeText();
     }
   }
   
@@ -297,7 +303,7 @@ function animateWaveText() {
   context.fillText(
       text,
       xPos,
-      canvas.height / 2 / (window.devicePixelRatio || 1) + waveOffset
+      canvas.height / 2  + waveOffset
   );
 
   xPos -= textSpeed;
@@ -326,7 +332,7 @@ function animateNeonText() {
   context.fillStyle = gradient;
   context.textAlign = "left";
 
-  context.fillText(text, xPos, canvas.height / 2 / (window.devicePixelRatio || 1));
+  context.fillText(text, xPos, canvas.height / 2);
 
   xPos -= textSpeed;
   if (xPos + context.measureText(text).width < 0) {
@@ -347,7 +353,7 @@ function animateFadeText() {
   const opacity = Math.abs(Math.sin(Date.now() * 0.001));
 
   context.globalAlpha = opacity;
-  context.fillText(text, xPos, canvas.height / 2 / (window.devicePixelRatio || 1));
+  context.fillText(text, xPos, canvas.height / 2);
   context.globalAlpha = 1;
 
   xPos -= textSpeed;
@@ -358,24 +364,3 @@ function animateFadeText() {
   animationId = requestAnimationFrame(animateFadeText);
 }
 
-function animateFadeText() {
-    const canvas = document.getElementById("textCanvas");
-    const context = canvas.getContext("2d");
-    context.clearRect(0, 0, canvas.width, canvas.height);
-    context.font = `${textSize}px ${currentFont}`;
-    context.fillStyle = textColor;
-    context.textAlign = "left";
-  
-    const opacity = Math.abs(Math.sin(Date.now() * 0.001));
-  
-    context.globalAlpha = opacity;
-    context.fillText(text, xPos, canvas.height / 2 / (window.devicePixelRatio || 1));
-    context.globalAlpha = 1;
-  
-    xPos -= textSpeed;
-    if (xPos + context.measureText(text).width < 0) {
-      xPos = canvas.width / (window.devicePixelRatio || 1);
-    }
-  
-    animationId = requestAnimationFrame(animateFadeText);
-  }
