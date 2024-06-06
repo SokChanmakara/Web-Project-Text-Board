@@ -356,8 +356,8 @@ canvas:fullscreen {
     display: flex;
     justify-content: center;
     /* margin: 200px 200px; Simplified margin for mobile */
-    margin-left: 40px;
-    margin-right: 40px;
+    margin-left: 45px;
+    margin-right: 30px;
   }
 
   header:hover{
@@ -374,7 +374,7 @@ canvas:fullscreen {
   
   #nav-button {
     position: absolute;
-    top: 15px; /* Adjusted for mobile */
+    top: 30px; /* Adjusted for mobile */
     left: 10px; /* Adjusted for mobile */
     height: 35px; /* Adjusted for mobile */
     width: 35px; /* Adjusted for mobile */
@@ -395,7 +395,7 @@ canvas:fullscreen {
   #sidebar {
     position: fixed;
     z-index: 10;
-    top: 0;
+    top: 20;
     left: 0;
     width: 250px; /* Adjust as per your design */
     height: 100%;
@@ -526,7 +526,7 @@ canvas:fullscreen {
   }
   
   #textInput {
-    width: 25em; /* Adjusted for mobile */
+    width: 80%; /* Adjusted for mobile */
     height: 2em; /* Adjusted for mobile */
     border: 2px solid black;
     border-radius: 10px;
@@ -568,8 +568,6 @@ canvas:fullscreen {
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
     transform-origin: bottom left;
 }
 
