@@ -238,21 +238,29 @@ function startAnimation() {
   
 // Update the animation function to scroll from bottom to top
 function animateText() {
-    const canvas = document.getElementById('textCanvas');
     const context = canvas.getContext('2d');
     context.clearRect(0, 0, canvas.width, canvas.height);
-
-    xPos -= textSpeed;
-    if (xPos + context.measureText(text).width < 0) {
-        xPos = canvas.width;
-    }
-
-    context.font = `${textSize}px ${currentFont}`;
     context.fillStyle = textColor;
-    context.fillText(text, xPos, canvas.height / 2);
+    context.font = `${textSize}px ${currentFont}`;
+    context.textBaseline = 'top';
+
+    // Adjust the starting position based on mobile or desktop view
+    if (window.innerWidth <= 768) {
+        xPos -= textSpeed;
+        if (xPos < -canvas.height) xPos = canvas.width;
+        context.save();
+        context.rotate(-Math.PI / 2);
+        context.fillText(text, -canvas.height + xPos, canvas.width / 2 - textSize / 2);
+        context.restore();
+    } else {
+        xPos -= textSpeed;
+        if (xPos < -context.measureText(text).width) xPos = canvas.width;
+        context.fillText(text, xPos, canvas.height / 2 - textSize / 2);
+    }
 
     animationId = requestAnimationFrame(animateText);
 }
+
 
 
 function animateBounceText() {
