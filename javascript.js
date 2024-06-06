@@ -286,8 +286,8 @@ function animateWaveText() {
 function animateNeonText() {
   const canvas = document.getElementById("textCanvas");
   const context = canvas.getContext("2d");
-  drawBackground(context, canvas);
   context.clearRect(0, 0, canvas.width, canvas.height);
+    drawBackground(context, canvas);
   context.font = `${textSize}px ${currentFont}`;
 
   // Create a gradient for neon effect with multiple colors
