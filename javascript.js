@@ -83,9 +83,9 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   })
 
-  const canvas = document.getElementById('textCanvas');
-  adjustCanvasForMobile(canvas);
-  window.addEventListener('resize', () => adjustCanvasForMobile(canvas));
+//   const canvas = document.getElementById('textCanvas');
+//   adjustCanvasForMobile(canvas);
+//   window.addEventListener('resize', () => adjustCanvasForMobile(canvas));
   
 
 });
@@ -238,26 +238,18 @@ function startAnimation() {
   
 // Update the animation function to scroll from bottom to top
 function animateText() {
-    const context = canvas.getContext('2d');
+    const canvas = document.getElementById("textCanvas");
+    const context = canvas.getContext("2d");
     context.clearRect(0, 0, canvas.width, canvas.height);
-    context.fillStyle = textColor;
+    drawBackground(context, canvas);
     context.font = `${textSize}px ${currentFont}`;
-    context.textBaseline = 'top';
-
-    // Adjust the starting position based on mobile or desktop view
-    if (window.innerWidth <= 768) {
-        xPos -= textSpeed;
-        if (xPos < -canvas.height) xPos = canvas.width;
-        context.save();
-        context.rotate(-Math.PI / 2);
-        context.fillText(text, -canvas.height + xPos, canvas.width / 2 - textSize / 2);
-        context.restore();
-    } else {
-        xPos -= textSpeed;
-        if (xPos < -context.measureText(text).width) xPos = canvas.width;
-        context.fillText(text, xPos, canvas.height / 2 - textSize / 2);
+    context.fillStyle = textColor;
+    context.textAlign = "left";
+    context.fillText(text, xPos, canvas.height / 2);
+    xPos -= textSpeed;
+    if (xPos + context.measureText(text).width < 0) {
+        xPos = canvas.width / (window.devicePixelRatio || 1);
     }
-
     animationId = requestAnimationFrame(animateText);
 }
 

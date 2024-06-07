@@ -574,16 +574,16 @@ canvas:fullscreen {
 }
 
   #textCanvas {
-    transform: rotate(90deg);
-    transform-origin: bottom left;
-    width: 100vh; /* Full height of the viewport */
-    height: 100vw; /* Full width of the viewport */
+    /* transform: rotate(90deg);
+    transform-origin: bottom left; */
+    width: 100%; /* Full height of the viewport */
+    height: 100%; /* Full width of the viewport */
     overflow: hidden;
     display: block;
     margin-top: 20px;
     position: relative;
-    z-index: 1;
-    top: -400px;
+    /* z-index: 1; */
+    /* top: -400px; */
     left: 0;
 
 
