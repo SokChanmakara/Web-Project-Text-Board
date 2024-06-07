@@ -273,10 +273,10 @@ function animateBounceText() {
       context.textAlign = "center";
       context.fillText(text, x, y);
 
-      if (x + context.measureText(text).width / 2 > rect.width || x - context.measureText(text).width / 2 < 0) {
+      if (x + context.measureText(text).width / 2 > canvas.width || x - context.measureText(text).width / 2 < 0) {
           dx = -dx;
       }
-      if (y + textSize/2 > rect.height || y - textSize < 0) {
+      if (y + textSize/2 > canvas.height || y - textSize < 0) {
           dy = -dy;
       }
 
