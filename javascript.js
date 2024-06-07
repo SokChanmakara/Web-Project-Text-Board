@@ -248,7 +248,7 @@ function animateText() {
     context.fillText(text, xPos, canvas.height / 2);
     xPos -= textSpeed;
     if (xPos + context.measureText(text).width < 0) {
-        xPos = canvas.width / (window.devicePixelRatio || 1);
+        xPos = canvas.width;
     }
     animationId = requestAnimationFrame(animateText);
 }
@@ -336,7 +336,7 @@ function animateNeonText() {
 
   xPos -= textSpeed;
   if (xPos + context.measureText(text).width < 0) {
-    xPos = canvas.width / (window.devicePixelRatio || 1);
+    xPos = canvas.width;
   }
 
   animationId = requestAnimationFrame(animateNeonText);
@@ -359,7 +359,7 @@ function animateFadeText() {
 
   xPos -= textSpeed;
   if (xPos + context.measureText(text).width < 0) {
-    xPos = canvas.width / (window.devicePixelRatio || 1);
+    xPos = canvas.width;
   }
 
   animationId = requestAnimationFrame(animateFadeText);
